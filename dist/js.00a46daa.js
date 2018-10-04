@@ -29960,30 +29960,37 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var colorPalette = ['#31ffe0', '#6ec4c6', '#e6cca5', '#f395a5', '#fff6bd'];
+var minRadius = 50;
 var maxRadius = 200;
 
 var Bubble =
 /*#__PURE__*/
 function () {
-  function Bubble(id) {
+  function Bubble(id, clicked) {
     _classCallCheck(this, Bubble);
 
     this.id = id;
-    this.radius = _lodash.default.random(10, maxRadius, false) + 'px';
-    this.posX = _lodash.default.random(-10, 100, false) + '%';
-    this.posY = _lodash.default.random(-10, 100, false) + '%';
+    this.radius = _lodash.default.random(minRadius, maxRadius, false) + 'px';
     this.color = colorPalette[_lodash.default.random(0, 4, false)];
-    this.transitionDuration = _lodash.default.random(10, 15, false) + 's';
+    this.transitionDuration = _lodash.default.random(7, 12, false) + 's';
+
+    if (clicked) {
+      this.posX = event.pageY - parseInt(this.radius) / 2 + 'px';
+      this.posY = event.pageX - parseInt(this.radius) / 2 + 'px';
+    } else {
+      this.posX = _lodash.default.random(-10, 100, false) + '%';
+      this.posY = _lodash.default.random(-10, 100, false) + '%';
+    }
   }
 
   _createClass(Bubble, [{
-    key: "render",
-    value: function render() {
+    key: "mount",
+    value: function mount() {
       (0, _jquery.default)('#app').append("<div id=\"".concat(this.id, "\" class=\"bubble\"></div>"));
     }
   }, {
-    key: "reRender",
-    value: function reRender() {
+    key: "updateCss",
+    value: function updateCss() {
       (0, _jquery.default)('#' + this.id).css({
         'width': this.radius,
         'height': this.radius,
@@ -30000,14 +30007,34 @@ function () {
       this.posY = parseInt(this.posY) + _lodash.default.random(-1, 1, false) + '%';
     }
   }, {
-    key: "activateAnimation",
-    value: function activateAnimation() {
+    key: "updatePosCritical",
+    value: function updatePosCritical() {
+      this.posX = parseInt(this.posX) + _lodash.default.random(-20, 20, false) + '%';
+      this.posY = parseInt(this.posY) + _lodash.default.random(-20, 20, false) + '%';
+      this.transitionDuration = _lodash.default.random(2, 5, false) + 's';
+    }
+  }, {
+    key: "handleMouseover",
+    value: function handleMouseover() {
       var _this = this;
 
-      setInterval(function () {
-        _this.updatePos();
+      (0, _jquery.default)('#' + this.id).mouseover(function () {
+        _this.updatePosCritical();
 
-        _this.reRender();
+        _this.updateCss();
+
+        console.log('Mouse over element: ' + _this);
+      });
+    }
+  }, {
+    key: "activateAnimation",
+    value: function activateAnimation() {
+      var _this2 = this;
+
+      setInterval(function () {
+        _this2.updatePos();
+
+        _this2.updateCss();
       }, this.transitionDuration);
     }
   }]);
@@ -30031,17 +30058,32 @@ var _Bubble = _interopRequireDefault(require("./modules/Bubble"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var numberOfBubbles = 200;
+var numberOfBubbles = 150;
+var index = 1;
 var bubbles = [];
 
-for (var index = 1; index < numberOfBubbles + 1; index++) {
+function updateArray() {
+  bubbles.forEach(function (element) {
+    element.mount();
+    element.updateCss(); // element.activateAnimation();
+
+    element.handleMouseover();
+  });
+}
+
+for (index = 1; index < numberOfBubbles + 1; index++) {
   bubbles.push(new _Bubble.default(index));
 }
 
-bubbles.forEach(function (element) {
-  element.render();
-  element.activateAnimation();
-});
+updateArray(); // $('#app').click(() => {
+// 	index = index + 1;
+// 	let newBubble = new Bubble(index, true);
+// 	bubbles.push(newBubble);
+// 	newBubble.mount();
+// 	newBubble.updateCss();
+// 	newBubble.handleMouseover();
+// 	// newBubble.activateAnimation();
+// });
 },{"jquery":"../node_modules/jquery/dist/jquery.js","lodash":"../node_modules/lodash/lodash.js","normalize-css":"../node_modules/normalize-css/index.js","../css/index.css":"css/index.css","./modules/Bubble":"js/modules/Bubble.js"}],"../../../Users/Саня/AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -30069,7 +30111,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58081" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50106" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -30212,4 +30254,4 @@ function hmrAccept(bundle, id) {
   });
 }
 },{}]},{},["../../../Users/Саня/AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/index.js"], null)
-//# sourceMappingURL=js.00a46daa.map
+//# sourceMappingURL=/js.00a46daa.map

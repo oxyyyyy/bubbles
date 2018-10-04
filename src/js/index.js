@@ -6,15 +6,33 @@ import '../css/index.css';
 
 import Bubble from './modules/Bubble';
 
-const numberOfBubbles = 200;
+const numberOfBubbles = 150;
+
+let index = 1;
 
 let bubbles = [];
 
-for (let index = 1; index < numberOfBubbles + 1; index++) {
+function updateArray() {
+	bubbles.forEach(element => {
+		element.mount();
+		element.updateCss();
+		// element.activateAnimation();
+		element.handleMouseover();
+	});
+}
+
+for (index = 1; index < numberOfBubbles + 1; index++) {
 	bubbles.push(new Bubble(index));
 }
 
-bubbles.forEach(element => {
-	element.render();
-	element.activateAnimation();
-});
+updateArray();
+
+// $('#app').click(() => {
+// 	index = index + 1;
+// 	let newBubble = new Bubble(index, true);
+// 	bubbles.push(newBubble);
+// 	newBubble.mount();
+// 	newBubble.updateCss();
+// 	newBubble.handleMouseover();
+// 	// newBubble.activateAnimation();
+// });
