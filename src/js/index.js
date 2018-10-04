@@ -18,10 +18,3 @@ bubbles.forEach(element => {
 	element.render();
 	element.activateAnimation();
 });
-
-// setInterval(() => {
-//   bubbles.forEach(element => {
-// 		element.animate();
-// 		element.reRender();
-// 	});
-// }, animationTickMs);
