@@ -1,7 +1,11 @@
 {
   "name": "bubbles",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel src/index.html --open",
+    "build": "parcel build src/index.html -d build/output --public-url ./"
+  },
   "license": "MIT",
   "dependencies": {
     "jquery": "^3.3.1",

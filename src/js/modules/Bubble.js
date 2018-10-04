@@ -15,10 +15,6 @@ export default class Bubble {
 		this.transitionDuration = _.random(10, 15, false) + 's';
 	}
 
-	_generateInlineStyles() {
-		return `style="width: ${this.radius}; height: ${this.radius}; top: ${this.posY}; left: ${this.posX}; background-color: ${this.color}; transition-duration: ${this.transitionDuration}"`;
-	}
-
 	render() {
 		$('#app').append(`<div id="${this.id}" class="bubble"></div>`);
 	}

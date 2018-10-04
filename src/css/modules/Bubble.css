@@ -1,6 +1,7 @@
 .bubble {
 	border-radius: 50%;
 	box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.08);
-	transition: all ease-out;
+	transition-property: top, left;
+	transition-timing-function: ease-out;
 	position: absolute;
 }
