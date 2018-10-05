@@ -7,7 +7,7 @@ const maxRadius = 200;
 
 export default class Bubble {
 
-	constructor(id, clicked) {
+	constructor(id, clicked = false) {
 		this.id = id;
 		this.radius = _.random(minRadius, maxRadius, false) + 'px';
 		this.color = colorPalette[_.random(0, 4, false)];
@@ -51,7 +51,6 @@ export default class Bubble {
 		$('#' + this.id).mouseover(() => {
 			this.updatePosCritical();
 			this.updateCss();
-			console.log('Mouse over element: ' + this);
 		});
 	}
 
