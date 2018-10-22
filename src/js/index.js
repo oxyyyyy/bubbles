@@ -34,7 +34,7 @@ numberOfBubblesInput.change(() => {
 	$('#app').empty();
 	index = 1;
 	updateArray();
-})
+});
 
 $('#app').click(() => {
 	index = index + 1;

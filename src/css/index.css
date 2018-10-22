@@ -6,11 +6,13 @@ body {
 	justify-content: flex-start;
 	align-content: center;
 	overflow: hidden;
+	position: relative;
 }
 #app {
 	width: 100%;
 	height: 100%; 
 	background: url('../img/just-waves.png') repeat;
+	cursor: cell;
 	position: relative;
 }
 #app-config {
@@ -18,4 +20,18 @@ body {
 	padding: 25px;
 	position: absolute;
 	z-index: 100;
+}
+.ruleX {
+	position: absolute;
+	background-color: #333;
+	width: 1px;
+	height: 100%;
+	top: 0;
+}
+.ruleY {
+	position: absolute;
+	background-color: #333;
+	height: 1px;
+	width: 100%;
+	left: 0;
 }
