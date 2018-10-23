@@ -16,8 +16,8 @@ export default class Bubble {
 			this.posX = event.pageY - parseInt(this.radius) / 2 + 'px';
 			this.posY = event.pageX - parseInt(this.radius) / 2 + 'px';
 		} else {
-			this.posX = _.random(-10, 100, false) + '%';
-			this.posY = _.random(-10, 100, false) + '%';
+			this.posX = _.random(0, $(window).width(), false) + 'px';
+			this.posY = _.random(0, $(window).height() * 2, false) + 'px';
 		}
 	}
 
@@ -37,19 +37,27 @@ export default class Bubble {
 	}
 
 	updatePos() {
-		this.posX = parseInt(this.posX) + _.random(-1, 1, false) + '%';
-		this.posY = parseInt(this.posY) + _.random(-1, 1, false) + '%';
+		this.posX = parseInt(this.posX) + _.random(-50, 50, false);
+		this.posY = parseInt(this.posY) + _.random(-50, 50, false);
 	}
 
 	updatePosCritical() {
-		this.posX = parseInt(this.posX) + _.random(-20, 20, false) + '%';
-		this.posY = parseInt(this.posY) + _.random(-20, 20, false) + '%';
+		this.posX = parseInt(this.posX) + _.random(-200, 200, false);
+		this.posY = parseInt(this.posY) + _.random(-200, 200, false);
 		this.transitionDuration = _.random(2, 5, false) + 's';
 	}
 
+	showRulers(clientX, clientY) {
+		$('#app').append('<div class="ruleX"></div>');
+		$('#app').append('<div class="ruleY"></div>');
+		$('.ruleX').css('left', clientX);
+		$('.ruleY').css('top', clientY);
+	}
+
 	handleMouseover() {
-		$('#' + this.id).mouseover(() => {
+		$('#' + this.id).mouseover((e) => {
 			this.updatePosCritical();
+			this.showRulers(e.clientX, e.clientY);
 			this.updateCss();
 		});
 	}
